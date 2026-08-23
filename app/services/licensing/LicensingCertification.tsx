@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { ChevronDown, Check, Info, ArrowRight, ArrowLeftRight, Award, ShieldCheck, FileCheck } from "lucide-react";
+import { useModalStore } from "@/lib/useModalStore";
 
 type CertItem = {
   title: string;
@@ -57,13 +58,6 @@ const CERT_DATA: CertCategory[] = [
   }
 ];
 
-// Унифицированное открытие модала
-const openConsultationModal = () => {
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("openConsultationModal"));
-  }
-};
-
 export default function LicensingCertification() {
   return (
     <section className="bg-white py-16 md:py-24">
@@ -116,6 +110,7 @@ export default function LicensingCertification() {
 // Компонент аккордеона (без изменений)
 function LicensingAccordion({ category, index }: { category: CertCategory; index: number }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { openConsultationModal } = useModalStore();
 
   const toggle = (i: number) => {
     setOpenIndex(openIndex === i ? null : i);

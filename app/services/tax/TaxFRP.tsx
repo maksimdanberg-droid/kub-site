@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Percent, Calendar, Banknote, Factory, ShieldCheck, FileText, ArrowRight } from "lucide-react";
+import { useModalStore } from "@/lib/useModalStore";
 
 const FRP_PARAMS = [
   {
@@ -39,13 +40,6 @@ const DIRECTIONS = [
   "Маркировка товаров",
 ];
 
-// Открытие модала консультации
-const openConsultationModal = () => {
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("openConsultationModal"));
-  }
-};
-
 const containerVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
@@ -57,6 +51,8 @@ const itemVariants = {
 };
 
 export default function TaxFRP() {
+  const { openConsultationModal } = useModalStore();
+  
   return (
     <section className="bg-[#F8FAFC] py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

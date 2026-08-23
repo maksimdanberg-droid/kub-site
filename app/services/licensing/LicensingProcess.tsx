@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Search, FileText, CheckCircle2, MessageCircle } from "lucide-react";
+import { useModalStore } from "@/lib/useModalStore";
 
 const STEPS = [
   {
@@ -32,14 +33,9 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
-// ✅ Унифицированное открытие модала
-const openConsultationModal = () => {
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("openConsultationModal"));
-  }
-};
-
 export default function LicensingProcess() {
+  const { openConsultationModal } = useModalStore();
+  
   return (
     <section className="bg-white py-16 md:py-24">
       <Container>

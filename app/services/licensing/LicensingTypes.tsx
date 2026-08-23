@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { ChevronDown, Check, Info, ArrowRight } from "lucide-react";
+import { useModalStore } from "@/lib/useModalStore";
 
 type LicenseItem = {
   title: string;
@@ -75,13 +76,6 @@ const LICENSES: LicenseCategory[] = [
   }
 ];
 
-// Унифицированное открытие модала
-const openConsultationModal = () => {
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("openConsultationModal"));
-  }
-};
-
 export default function LicensingTypes() {
   return (
     <section className="bg-[#F8FAFC] py-16 md:py-24">
@@ -98,6 +92,7 @@ export default function LicensingTypes() {
 
 function LicensingAccordion({ category, index }: { category: LicenseCategory; index: number }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { openConsultationModal } = useModalStore();
 
   const toggle = (i: number) => {
     setOpenIndex(openIndex === i ? null : i);

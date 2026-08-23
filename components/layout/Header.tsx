@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import { ChevronDown, Building2, TrendingUp, Percent, FileLock, FileCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import ConsultationModal from "@/components/ui/ConsultationModal";
+import { useModalStore } from "@/lib/useModalStore";
 
 // ✅ Ссылки ведут на отдельные страницы
 const MAIN_LINKS = [
@@ -27,7 +27,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // ✅ Модал
+  const { openConsultationModal } = useModalStore(); // ✅ Используем Zustand store
 
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -50,23 +50,6 @@ export function Header() {
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // ✅ Слушатель кастомного события для открытия модала из других компонентов
-  useEffect(() => {
-    let lastOpenTime = 0;
-    
-    const handleOpenModal = () => {
-      const now = Date.now();
-      // Открываем не чаще чем раз в 400ms
-      if (now - lastOpenTime > 400) {
-        lastOpenTime = now;
-        setIsModalOpen(true);
-      }
-    };
-    
-    window.addEventListener("openConsultationModal", handleOpenModal as EventListener);
-    return () => window.removeEventListener("openConsultationModal", handleOpenModal as EventListener);
   }, []);
 
   // ✅ Hover логика для десктопа (ВОССТАНОВЛЕНО)
@@ -220,9 +203,9 @@ export function Header() {
 
             {/* CTA & Mobile Toggle */}
             <div className="flex items-center gap-4">
-              {/* ✅ Кнопка открывает модал */}
+              {/* ✅ Кнопка открывает модал через Zustand */}
               <button
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => openConsultationModal()}
                 className="hidden md:inline-flex items-center justify-center px-5 py-2.5 bg-kub-gold text-kub-navy font-semibold rounded-xl hover:bg-[#D4AF37]/90 transition-all shadow-lg shadow-kub-gold/20 cursor-pointer"
               >
                 Консультация
@@ -285,9 +268,9 @@ export function Header() {
                   </Link>
                 ))}
                 <div className="mt-4 pt-4 border-t border-gray-100">
-                  {/* ✅ Мобильная кнопка тоже открывает модал */}
+                  {/* ✅ Мобильная кнопка тоже открывает модал через Zustand */}
                   <button
-                    onClick={() => { setIsModalOpen(true); setIsMobileMenuOpen(false); }}
+                    onClick={() => { openConsultationModal(); setIsMobileMenuOpen(false); }}
                     className="w-full py-3 bg-kub-gold text-kub-navy font-semibold rounded-xl hover:bg-[#D4AF37]/90 transition-all"
                   >
                     Бесплатная консультация
@@ -298,9 +281,6 @@ export function Header() {
           )}
         </AnimatePresence>
       </motion.header>
-
-      {/* ✅ Модал консультации */}
-      <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

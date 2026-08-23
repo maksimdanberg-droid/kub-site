@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Manrope, Inter } from "next/font/google";
-import Script from "next/script"; // ✅ Добавлен импорт Script
+import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ConsentBanner from "@/components/ui/ConsentBanner";
+import ConsultationModal from "@/components/ui/ConsultationModal";
 
 // Подключение шрифтов
 const geistSans = Geist({ subsets: ["latin", "cyrillic"], variable: "--font-geist-sans" });
@@ -67,7 +68,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="min-h-screen">{children}</main>
         <Footer />
         <ConsentBanner />
+        {/* ✅ Модал консультации — рендерится ТОЛЬКО ЗДЕСЬ, один раз на всё приложение */}
+        <ConsultationModalWrapper />
       </body>
     </html>
   );
 }
+
+// ✅ Обёртка для ConsultationModal с использованием Zustand store
+function ConsultationModalWrapper() {
+  const { isOpen, onClose } = useConsultationModal();
+  return <ConsultationModal isOpen={isOpen} onClose={onClose} />;
+}
+
+// ✅ Хук для управления модалом из любого компонента
+function useConsultationModal() {
+  const { isConsultationModalOpen, openConsultationModal, closeConsultationModal } = useModalStore();
+  return {
+    isOpen: isConsultationModalOpen,
+    open: openConsultationModal,
+    onClose: closeConsultationModal,
+  };
+}
+
+// ✅ Экспортируем хук для использования в других компонентах
+export { useConsultationModal };
