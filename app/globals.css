@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import "tailwindcss/preflight" layer(base);
+
+:root {
+  /* Ваши фирменные цвета */
+  --color-navy: #0A192F;
+  --color-gold: #D4AF37;
+  --color-white: #FFFFFF;
+  --color-gray-light: #F4F7F6;
+  html {
+  scroll-behavior: smooth;
+}
+
+  /* Стандартные переменные */
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
+}
+
+@theme inline {
+  /* Основные цвета */
+  --color-kub-navy: #0A192F;
+  --color-kub-gold: #D4AF37;
+  
+  /* Фоны и текст */
+  --color-bg: #FFFFFF;
+  --color-text: #171717;
+  --color-bg-dark: #0A192F;
+  --color-text-dark: #FFFFFF;
+  
+  /* Шрифты */
+  --font-heading: "Manrope", "Geist Sans", system-ui, sans-serif;
+  --font-body: "Inter", "Geist Sans", system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--color-bg-dark);
+    --foreground: var(--color-text-dark);
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+/* Утилиты для плавного скролла и выделения */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--color-kub-gold);
+  color: var(--color-kub-navy);
+}

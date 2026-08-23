@@ -1,0 +1,902 @@
+{
+  "generatedAt": "2026-05-22T13:00:20.502Z",
+  "stats": {
+    "pages": 10,
+    "withMetadata": 9,
+    "totalHeadings": 91
+  },
+  "pages": [
+    {
+      "page": "app\\page.tsx",
+      "metadata": {
+        "hasExport": false,
+        "title": null,
+        "description": null,
+        "openGraph": null,
+        "canonical": null,
+        "isDynamic": false
+      },
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "Получайте гранты иналоговые льготы",
+          "line": 46,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\sections\\Hero.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Закрываем весь цикллегализации инноваций",
+          "line": 44,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\sections\\Services.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 89,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "components\\sections\\Services.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Прозрачный процесс: от заявки до денег на счёте",
+          "line": 61,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "components\\sections\\Timeline.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 131,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "components\\sections\\Timeline.tsx"
+        },
+        {
+          "tag": "h4",
+          "text": null,
+          "line": 182,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "components\\sections\\Timeline.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Экспертиза вместо обещаний",
+          "line": 31,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\sections\\AboutTeaser.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Гарантии, которые прописаны в договоре, а не на словах",
+          "line": 78,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "components\\sections\\FAQ.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Как зафиксированы гарантии",
+          "line": 169,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\sections\\FAQ.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Гарантии в договоре",
+          "line": 197,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\sections\\FAQ.tsx"
+        }
+      ],
+      "issues": [
+        {
+          "type": "error",
+          "msg": "Отсутствует export const metadata"
+        }
+      ]
+    },
+    {
+      "page": "app\\services\\page.tsx",
+      "metadata": {
+        "hasExport": true,
+        "title": "Услуги — ООО «КУБ» | Гранты, Сколково, налоги",
+        "description": "5 направлений консалтинга для технологических компаний: резидентство Сколково, гранты, налоговые льготы, патентование, лицензирование. Фиксированные сроки и цена.",
+        "openGraph": "[object]",
+        "canonical": null,
+        "isDynamic": false
+      },
+      "headings": [
+        {
+          "tag": "h3",
+          "text": "Навигация",
+          "line": 110,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Контакты",
+          "line": 126,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h1",
+          "text": "Легализация инноваций и снижение налоговой нагрузки",
+          "line": 29,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\ServicesHero.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Наши направления",
+          "line": 107,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\ServicesGrid.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 144,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\ServicesGrid.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Услуги работают в связке. Мы настраиваем их вместе.",
+          "line": 29,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\ServicesFlow.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Как выбрать направление? Краткий чек-лист",
+          "line": 33,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\ServicesChecklist.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Определите точку роста вашего проекта",
+          "line": 72,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\ServicesAuditForm.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Заявка принята!",
+          "line": 110,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\ServicesAuditForm.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Часто задаваемые вопросы по услугам",
+          "line": 44,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\ServicesFaq.tsx"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "page": "app\\services\\tax\\page.tsx",
+      "metadata": {
+        "hasExport": true,
+        "title": "Налоговые льготы — ООО «КУБ» | МТК, Сколково, ФРП, реестры 719/878",
+        "description": "Снижаем налоги легально: 0% прибыль, 15% взносы, займы от 3%. Статусы МТК, Сколково, реестры Минпромторга. Аудит за 1 день.",
+        "openGraph": "[object]",
+        "canonical": null,
+        "isDynamic": false
+      },
+      "headings": [
+        {
+          "tag": "h3",
+          "text": "Навигация",
+          "line": 110,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Контакты",
+          "line": 126,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h1",
+          "text": "Налоговые льготы и Льготные займы для технологических компаний",
+          "line": 28,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\tax\\TaxHero.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Статусы, которые меняют налоговую модель",
+          "line": 137,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\tax\\TaxStatuses.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 201,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\tax\\TaxStatuses.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Льготное финансирование ФРПи производственные программы",
+          "line": 66,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\tax\\TaxFRP.tsx"
+        },
+        {
+          "tag": "h4",
+          "text": "Реестр российской промышленной продукции (ПП 719)",
+          "line": 163,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\tax\\TaxFRP.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Как мы внедряем льготы без рисковдля бизнеса",
+          "line": 39,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\tax\\TaxFinalCTA.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Кредит под 35% или заём под 3%? Выбор за вами",
+          "line": 73,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "components\\ui\\TaxFinalImpact.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Обычный путь",
+          "line": 101,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\ui\\TaxFinalImpact.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "С оптимизацией от нашей Команды",
+          "line": 170,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\ui\\TaxFinalImpact.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Калькулятор выгоды",
+          "line": 235,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\ui\\TaxFinalImpact.tsx"
+        }
+      ],
+      "issues": [
+        {
+          "type": "warn",
+          "msg": "Пропуск уровня: h2 → h4 (лучше: h3)"
+        }
+      ]
+    },
+    {
+      "page": "app\\services\\skolkovo\\page.tsx",
+      "metadata": {
+        "hasExport": true,
+        "title": "Резидентство Сколково — ООО «КУБ» | 0% налоги, гранты до 30 млн ₽",
+        "description": "Помогаем получить статус резидента Сколково: 0% на прибыль, НДС, имущество. Гранты, микрогранты, сопровождение. Сроки 2,5–3 месяца.",
+        "openGraph": "[object]",
+        "canonical": null,
+        "isDynamic": false
+      },
+      "headings": [
+        {
+          "tag": "h3",
+          "text": "Навигация",
+          "line": 110,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Контакты",
+          "line": 126,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h1",
+          "text": "Резидентство Сколково: статус, микрогранты и защита технологий",
+          "line": 29,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\skolkovo\\SkolkovoHero.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Программы финансирования",
+          "line": 100,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\skolkovo\\SkolkovoPrograms.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 151,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\skolkovo\\SkolkovoPrograms.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Гранты и микрогранты Фонда «Сколково»",
+          "line": 68,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\skolkovo\\SkolkovoGrants.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 123,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\skolkovo\\SkolkovoGrants.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Налоговые льготы и сервисы резидента",
+          "line": 29,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\skolkovo\\SkolkovoBenefits.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Налоговые льготы",
+          "line": 62,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\skolkovo\\SkolkovoBenefits.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Инфраструктура",
+          "line": 83,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\skolkovo\\SkolkovoBenefits.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Кто может стать резидентом Сколково",
+          "line": 42,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\skolkovo\\SkolkovoCriteria.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Как мы работаем с вашим проектом",
+          "line": 90,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\skolkovo\\SkolkovoWorkflow.tsx"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "page": "app\\services\\patents\\page.tsx",
+      "metadata": {
+        "hasExport": true,
+        "title": "Патентование и защита ИП — ООО «КУБ» | Роспатент, товарные знаки, ПО",
+        "description": "Регистрируем патенты, товарные знаки, ПО. Ускоренная экспертиза Роспатента. Правовая основа для инвестиций и франчайзинга. Сроки от 3 месяцев.",
+        "openGraph": "[object]",
+        "canonical": null,
+        "isDynamic": false
+      },
+      "headings": [
+        {
+          "tag": "h3",
+          "text": "Навигация",
+          "line": 110,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Контакты",
+          "line": 126,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h1",
+          "text": "Патентование и защита интеллектуальной собственности",
+          "line": 28,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\patents\\PatentsHero.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Комплексная защита ваших технологий",
+          "line": 54,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\patents\\PatentsProcess.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 84,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\patents\\PatentsProcess.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": null,
+          "line": 100,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\patents\\PatentsTypes.tsx"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "page": "app\\services\\licensing\\page.tsx",
+      "metadata": {
+        "hasExport": true,
+        "title": "Лицензирование и сертификация — ООО «КУБ» | 15+ видов лицензий",
+        "description": "Получаем лицензии и сертификаты для бизнеса. Медицина, промышленность, IT, спецразрешения. Аудит, документы, сопровождение. Гарантия результата.",
+        "openGraph": "[object]",
+        "canonical": null,
+        "isDynamic": false
+      },
+      "headings": [
+        {
+          "tag": "h3",
+          "text": "Навигация",
+          "line": 110,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Контакты",
+          "line": 126,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h1",
+          "text": "Лицензирование Сертификация и разрешительные документы",
+          "line": 19,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\licensing\\LicensingHero.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Комплексное сопровождение лицензирования",
+          "line": 54,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\licensing\\LicensingProcess.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 81,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\licensing\\LicensingProcess.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": null,
+          "line": 116,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\licensing\\LicensingTypes.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Помогаем бизнесу работать легально",
+          "line": 93,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\licensing\\LicensingCertification.tsx"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "page": "app\\services\\grants\\page.tsx",
+      "metadata": {
+        "hasExport": true,
+        "title": "Гранты и субсидии — ООО «КУБ» | ФСИ, Минпромторг, АТР",
+        "description": "Помогаем получить гранты на НИОКР и коммерциализацию: ФСИ до 50 млн ₽, Минпромторг до 250 млн ₽. Сопровождение заявок, 85% одобрений.",
+        "openGraph": "[object]",
+        "canonical": null,
+        "isDynamic": false
+      },
+      "headings": [
+        {
+          "tag": "h3",
+          "text": "Навигация",
+          "line": 110,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Контакты",
+          "line": 126,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h1",
+          "text": "Гранты и субсидии: финансирование НИОКР и коммерциализации",
+          "line": 44,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\grants\\GrantsHero.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Доступные программы финансирования",
+          "line": 173,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\grants\\GrantsMatrix.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 238,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\grants\\GrantsMatrix.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 316,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\grants\\GrantsMatrix.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Как расти вместе с Фондом содействия инновациям",
+          "line": 96,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\grants\\FSIProgramRoadmap.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Кто может подавать заявки и почему важно не ошибиться",
+          "line": 71,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "components\\ui\\FSIExpertiseBanner.tsx"
+        },
+        {
+          "tag": "h4",
+          "text": null,
+          "line": 149,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "components\\ui\\FSIExpertiseBanner.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Как проходит отбор и что нужно для заявки",
+          "line": 72,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\grants\\GrantsRequirements.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 123,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\services\\grants\\GrantsRequirements.tsx"
+        },
+        {
+          "tag": "h4",
+          "text": "Приоритет для МТК",
+          "line": 141,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\grants\\GrantsRequirements.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Сроки, этапы и финансовые гарантии",
+          "line": 45,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\services\\grants\\GrantsFinalCTA.tsx"
+        }
+      ],
+      "issues": [
+        {
+          "type": "warn",
+          "msg": "Пропуск уровня: h2 → h4 (лучше: h3)"
+        }
+      ]
+    },
+    {
+      "page": "app\\contacts\\page.tsx",
+      "metadata": {
+        "hasExport": true,
+        "title": "Контакты — ООО «КУБ» | Консультация и аудит",
+        "description": "Свяжитесь с ООО «КУБ» для бесплатной консультации. Гранты, Сколково, налоговые льготы. Работаем по договору и NDA.",
+        "openGraph": "[object]",
+        "canonical": null,
+        "isDynamic": false
+      },
+      "headings": [
+        {
+          "tag": "h3",
+          "text": "Навигация",
+          "line": 110,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Контакты",
+          "line": 126,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h1",
+          "text": "Свяжитесь с нами",
+          "line": 18,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\contacts\\ContactsHero.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Контакты",
+          "line": 54,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\contacts\\ContactsInfo.tsx"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "page": "app\\cases\\page.tsx",
+      "metadata": {
+        "hasExport": true,
+        "title": "Кейсы — ООО «КУБ» | Реальные результаты в цифрах",
+        "description": "Реальные кейсы ООО «КУБ»: резидентство Сколково, гранты ФСИ, налоговые льготы. Измеримая выгода для технологических компаний.",
+        "openGraph": "[object]",
+        "canonical": null,
+        "isDynamic": false
+      },
+      "headings": [
+        {
+          "tag": "h3",
+          "text": "Навигация",
+          "line": 110,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Контакты",
+          "line": 126,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h1",
+          "text": "Реальные результаты измеримы в цифрах",
+          "line": 25,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\cases\\CasesHero.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "MedTech → Резидентство + грант ФСИ Старт-2",
+          "line": 33,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\cases\\CasesMedTech.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Что сделали",
+          "line": 65,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\cases\\CasesMedTech.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Промышленная автоматизация → Субсидия Минпромторга",
+          "line": 40,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\cases\\CasesIndustrial.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Что сделали",
+          "line": 70,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\cases\\CasesIndustrial.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "EdTech SaaS → Патенты на ядро + Резидентство",
+          "line": 34,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\cases\\CasesEdtech.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Что сделали",
+          "line": 66,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\cases\\CasesEdtech.tsx"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "page": "app\\about\\page.tsx",
+      "metadata": {
+        "hasExport": true,
+        "title": "О компании — ООО «КУБ» | Экспертиза в грантах и Сколково",
+        "description": "Команда ООО «КУБ»: патентные поверенные, юристы и аналитики. 10+ лет опыта, 340+ проектов, прозрачные условия.",
+        "openGraph": "[object]",
+        "canonical": null,
+        "isDynamic": false
+      },
+      "headings": [
+        {
+          "tag": "h3",
+          "text": "Навигация",
+          "line": 110,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": "Контакты",
+          "line": 126,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "components\\layout\\Footer.tsx"
+        },
+        {
+          "tag": "h1",
+          "text": "Экспертиза, прозрачность, результат",
+          "line": 42,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\about\\AboutContent.tsx"
+        },
+        {
+          "tag": "h3",
+          "text": null,
+          "line": 84,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\about\\AboutContent.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Основатель и ведущий эксперт ООО «КУБ»",
+          "line": 119,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\about\\AboutContent.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Структура команды: только профильные специалисты",
+          "line": 166,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\about\\AboutContent.tsx"
+        },
+        {
+          "tag": "h4",
+          "text": null,
+          "line": 212,
+          "isDynamic": true,
+          "isStatic": false,
+          "sourceComponent": "app\\about\\AboutContent.tsx"
+        },
+        {
+          "tag": "h2",
+          "text": "Подтверждённые результаты",
+          "line": 224,
+          "isDynamic": false,
+          "isStatic": true,
+          "sourceComponent": "app\\about\\AboutContent.tsx"
+        }
+      ],
+      "issues": [
+        {
+          "type": "warn",
+          "msg": "Пропуск уровня: h1 → h3 (лучше: h2)"
+        },
+        {
+          "type": "warn",
+          "msg": "Пропуск уровня: h2 → h4 (лучше: h3)"
+        }
+      ]
+    }
+  ]
+}
