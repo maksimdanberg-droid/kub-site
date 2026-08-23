@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ConsentBanner from "@/components/ui/ConsentBanner";
 import ConsultationModal from "@/components/ui/ConsultationModal";
+import { useModalStore } from "@/lib/useModalStore";
 
 // Подключение шрифтов
 const geistSans = Geist({ subsets: ["latin", "cyrillic"], variable: "--font-geist-sans" });

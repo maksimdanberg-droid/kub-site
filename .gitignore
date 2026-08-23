@@ -1,4 +1,4 @@
-```
+```gitignore
 # Dependencies
 node_modules/
 
@@ -11,22 +11,7 @@ out/
 # Environment variables
 .env
 .env.local
-*.env.*
-
-# Logs
-*.log
-
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*.tmp
+.env.*
 
 # Python
 __pycache__/
@@ -34,44 +19,39 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
-*.so
-.venv/
+env/
 venv/
-.env/
+.venv/
 pip-log.txt
 pip-delete-this-directory.txt
 .tox/
-.coverage*
-.nox/
-.pytest_cache/
-.mypy_cache/
-.hypothesis/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
 
-# Node.js
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-node_modules/
-dist/
-build/
-.nyc_output
-coverage/
-*.lcov
-.next/
-out/
-.nuxt/
-public/
-.cache/
-.parcel-cache
-.vercel/
-.now/
+# Logs
+logs
+*.log
 
-# TypeScript
-*.tsbuildinfo
-*.tsx
-*.ts
-
-# General
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+Icon?
+```
+
+Wait, let me reconsider. The modified files are only TypeScript/JSX source files (`ContactsInfo.tsx`, `layout.tsx`), which are source code files. Looking at the change list, there are no build artifacts, dependency directories, or temporary files that would require adding ignore rules. The current .gitignore appears to be empty based on the context.
+
+Since only source code files are being modified, no additional ignore rules are needed.
+
+```gitignore
+
 ```
