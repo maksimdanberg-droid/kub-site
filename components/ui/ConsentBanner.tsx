@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Cookie, ShieldCheck, X } from "lucide-react";
-import Link from "next/link";
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Cookie, ShieldCheck, X } from 'lucide-react';
+import Link from 'next/link';
 
 export default function ConsentBanner() {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,54 +13,40 @@ export default function ConsentBanner() {
   useEffect(() => {
     setIsMounted(true);
     
-    // Проверяем согласие только на клиенте
-    if (typeof window !== "undefined") {
-      const consent = localStorage.getItem("kub_consent_accepted");
+    if (typeof window !== 'undefined') {
+      // Показываем баннер ТОЛЬКО если записи о согласии ещё нет
+      const consent = localStorage.getItem('kub_consent_accepted');
       if (!consent) {
-        // Показываем с задержкой, чтобы не мешать первому впечатлению
-        const timer = setTimeout(() => setIsVisible(true), 2000);
+        const timer = setTimeout(() => setIsVisible(true), 1500); // 1.5 сек задержка
         return () => clearTimeout(timer);
       }
     }
   }, []);
 
-  // Фокус на кнопке "Принять" при появлении
   useEffect(() => {
     if (isVisible && acceptBtnRef.current) {
       acceptBtnRef.current.focus();
     }
   }, [isVisible]);
 
-  // Закрытие по Esc
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isVisible) {
-        e.preventDefault();
-        handleAccept();
-      }
-    };
-    document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
-  }, [isVisible]);
-
   const handleAccept = () => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("kub_consent_accepted", "true");
-      localStorage.setItem("kub_consent_timestamp", new Date().toISOString());
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('kub_consent_accepted', 'true');
+      localStorage.setItem('kub_consent_timestamp', new Date().toISOString());
       
-      // TODO: Отправить событие в аналитику
-      // if (typeof ym === 'function') {
-      //   ym(XXXXXX, 'reachGoal', 'consent_accepted');
-      // }
+      // ✅ ДОБАВЛЕНО: Сообщаем AnalyticsScripts, что можно грузить скрипты
+      window.dispatchEvent(new Event('consentUpdated'));
     }
     setIsVisible(false);
   };
 
   const handleMinimal = () => {
-    // Для минимального согласия тоже сохраняем факт (но можно добавить флаг)
-    if (typeof window !== "undefined") {
-      localStorage.setItem("kub_consent_accepted", "minimal");
-      localStorage.setItem("kub_consent_timestamp", new Date().toISOString());
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('kub_consent_accepted', 'minimal');
+      localStorage.setItem('kub_consent_timestamp', new Date().toISOString());
+      
+      // ✅ ДОБАВЛЕНО: Сообщаем AnalyticsScripts, что выбор сделан (останется в режиме блокировки)
+      window.dispatchEvent(new Event('consentUpdated'));
     }
     setIsVisible(false);
   };
@@ -71,19 +57,17 @@ export default function ConsentBanner() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ y: "100%", opacity: 0 }}
+          initial={{ y: '100%', opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: "100%", opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed bottom-0 left-0 right-0 bg-kub-navy text-white p-4 md:p-6 z-40 shadow-lg border-t border-white/10"
+          exit={{ y: '100%', opacity: 0 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="fixed bottom-0 left-0 right-0 bg-kub-navy text-white p-4 md:p-6 z-50 shadow-lg border-t border-white/10"
           role="alertdialog"
           aria-labelledby="consent-title"
           aria-describedby="consent-description"
         >
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-              
-              {/* Иконка + Текст */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 mt-0.5">
@@ -95,35 +79,23 @@ export default function ConsentBanner() {
                       Мы ценим вашу конфиденциальность
                     </h3>
                     <p id="consent-description" className="text-sm text-gray-300 leading-relaxed">
-                      Этот сайт использует файлы cookie и обрабатывает персональные данные для улучшения работы и персонализации контента. Продолжая использовать сайт, вы соглашаетесь с нашей{" "}
-                      <Link 
-                        href="/privacy" 
-                        className="text-kub-gold underline hover:text-[#D4AF37] transition-colors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      Этот сайт использует файлы cookie и обрабатывает персональные данные для улучшения работы. 
+                      Продолжая использовать сайт, вы соглашаетесь с нашей{' '}
+                      <Link href="/privacy" className="text-kub-gold underline hover:text-[#D4AF37] transition-colors">
                         Политикой конфиденциальности
-                      </Link>
-                      .
-                    </p>
-                    <p className="text-xs text-gray-500 mt-2">
-                      Вы можете отозвать согласие в любой момент, написав на{" "}
-                      <a href="mailto:privacy@kub-consult.ru" className="text-kub-gold/80 hover:text-kub-gold underline">
-                        privacy@kub-consult.ru
-                      </a>
+                      </Link>.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Кнопки */}
               <div className="flex flex-col sm:flex-row gap-3 md:gap-2 flex-shrink-0">
                 <button
                   ref={acceptBtnRef}
                   onClick={handleAccept}
-                  className="w-full sm:w-auto px-5 py-2.5 bg-kub-gold text-kub-navy font-semibold rounded-lg hover:bg-[#D4AF37]/90 transition-all focus:outline-none focus:ring-2 focus:ring-kub-gold focus:ring-offset-2 focus:ring-offset-kub-navy"
+                  className="w-full sm:w-auto px-5 py-2.5 bg-kub-gold text-kub-navy font-semibold rounded-lg hover:bg-[#D4AF37]/90 transition-all focus:outline-none focus:ring-2 focus:ring-kub-gold"
                 >
-                  Принять
+                  Принять все
                 </button>
                 <button
                   onClick={handleMinimal}
@@ -133,15 +105,13 @@ export default function ConsentBanner() {
                 </button>
               </div>
 
-              {/* Кнопка закрытия (для мобильных) */}
               <button
-                onClick={handleAccept}
+                onClick={handleMinimal} // Закрытие по крестику приравниваем к "minimal"
                 className="md:hidden absolute top-3 right-3 p-1.5 rounded-lg hover:bg-white/10 transition-colors"
                 aria-label="Закрыть уведомление"
               >
                 <X size={18} className="text-gray-400" />
               </button>
-
             </div>
           </div>
         </motion.div>
