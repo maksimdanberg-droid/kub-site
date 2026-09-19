@@ -18,7 +18,7 @@ const SERVICES_DROPDOWN = [
   { label: "Резидентство Сколково", href: "/services/skolkovo", icon: Building2, description: "Налоги 0%, гранты до 30 млн ₽" },
   { label: "Гранты и субсидии", href: "/services/grants", icon: TrendingUp, description: "Возврат до 100% затрат на R&D" },
   { label: "Займы и Налоговые льготы", href: "/services/tax", icon: Percent, description: "0% на прибыль, займы под 3%" },
-  { label: "Патентование и защита ИП", href: "/services/patents", icon: FileLock, description: "Регистрация изобретений за 3 мес." },
+  { label: "Патентование и защита интеллектуальной собственности", href: "/services/patents", icon: FileLock, description: "Регистрация изобретений за 3 мес." },
   { label: "Лицензирование и сертификация", href: "/services/licensing", icon: FileCheck, description: "Выход на госзакупки" },
 ];
 

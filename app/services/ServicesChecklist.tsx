@@ -18,7 +18,7 @@ const CHECKLIST_ITEMS: ChecklistItem[] = [
   { id: 1, scenario: "Нужно снизить налоги прямо сейчас и закрыть риски проверок", service: "Налоговые льготы", href: "/services/tax" },
   { id: 2, scenario: "Разрабатываете продукт и хотите обнулить НДС/прибыль на 10 лет", service: "Резидентство Сколково", href: "/services/skolkovo" },
   { id: 3, scenario: "Требуются деньги на НИОКР, прототип или сертификацию", service: "Гранты и субсидии", href: "/services/grants" },
-  { id: 4, scenario: "Готовите продукт к инвестициям или выходу на новые рынки", service: "Патентование и защита ИП", href: "/services/patents" },
+  { id: 4, scenario: "Готовите продукт к инвестициям или выходу на новые рынки", service: "Патентование и защита интеллектуальной собственности", href: "/services/patents" },
   { id: 5, scenario: "Заходите в госзакупки, торговые сети или экспорт", service: "Лицензирование и сертификация", href: "/services/licensing" },
 ];
 

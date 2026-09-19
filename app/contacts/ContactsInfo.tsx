@@ -9,7 +9,7 @@ const CONTACTS = [
     icon: Phone,
     label: "+7 (927) 064-21-71",
     sublabel: "Пн–Пт, 9:00–18:00 МСК",
-    href: "tel:+79210642171",
+    href: "tel:+79270642171",
   },
   {
     icon: Mail,

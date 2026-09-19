@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 const STATS = [
-  { value: "100+", label: "Оформленных проектов" },
+  { value: "200+", label: "Оформленных проектов" },
   { value: "1.7 млрд ₽", label: "Экономии для клиентов" },
   { value: "90+%", label: "Успешных кейсов" },
 ];
