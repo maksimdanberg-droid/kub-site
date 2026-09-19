@@ -108,8 +108,8 @@ export default function ConsentBanner() {
                     </p>
                     <p className="text-xs text-gray-500 mt-2">
                       Вы можете отозвать согласие в любой момент, написав на{" "}
-                      <a href="mailto:privacy@kub.ru" className="text-kub-gold/80 hover:text-kub-gold underline">
-                        privacy@kub.ru
+                      <a href="mailto:privacy@kub-consult.ru" className="text-kub-gold/80 hover:text-kub-gold underline">
+                        privacy@kub-consult.ru
                       </a>
                     </p>
                   </div>

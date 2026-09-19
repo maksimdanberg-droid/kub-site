@@ -126,21 +126,21 @@ export default function Footer() {
                 <p className="text-white font-heading font-semibold mb-4">Контакты</p>
                 <address className="not-italic space-y-3 text-sm">
                   <a
-                    href="tel:+7XXXXXXXXXX"
+                    href="tel:+79270642171"
                     className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-200 group"
-                    aria-label="Позвонить: +7 (XXX) XXX-XX-XX"
+                    aria-label="Позвонить: +7 (927) 064-21-71"
                   >
                     <Phone size={16} className="text-kub-gold group-hover:scale-110 transition-transform" />
-                    <span>+7 (XXX) XXX-XX-XX</span>
+                    <span>+7 (927) 064-21-71</span>
                   </a>
                   
                   <a
-                    href="mailto:info@kub.ru"
+                    href="mailto:info@kub-consult.ru"
                     className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-200 group"
-                    aria-label="Написать на info@kub.ru"
+                    aria-label="Написать на info@kub-consult.ru"
                   >
                     <Mail size={16} className="text-kub-gold group-hover:scale-110 transition-transform" />
-                    <span>info@kub.ru</span>
+                    <span>info@kub-consult.ru</span>
                   </a>
                   
                   <div className="flex items-start gap-3 text-gray-400">
@@ -161,12 +161,12 @@ export default function Footer() {
               
               {/* ИНН / ОГРН */}
               <div className="text-gray-500">
-                ООО «КУБ» | ИНН 77XXXXXXXX | ОГРН 1XXXXXXXXXXXXX
+                ООО «НТЦ «КУБ» | ИНН 7816760827 | ОГРН 1257800108466
               </div>
               
               {/* Копирайт */}
               <div className="text-gray-500 text-center md:text-right">
-                © ООО «КУБ», 2026. Все права защищены. Не является офертой.
+                © ООО «НТЦ «КУБ», 2026. Все права защищены. Не является офертой.
               </div>
               
             </div>

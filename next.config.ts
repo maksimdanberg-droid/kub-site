@@ -1,19 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Оптимизация изображений
+  // ✅ ГЛАВНОЕ: создаем статические HTML файлы в папку out
+  output: "export",
+  trailingSlash: true, 
+  
+  // ✅ Для статики отключаем оптимизацию картинок (требует сервер)
   images: {
-    formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 60,
+    unoptimized: true,
   },
   
-  // Включение экспериментальных фич (совместимо с Next.js 16 + Turbopack)
+  // Можно оставить для оптимизации CSS
   experimental: {
-    optimizeCss: true, // Требует `npm i critters`
+    optimizeCss: true,
   },
 
-  // Базовые настройки для production
-  output: "standalone",
+  // Убираем заголовок X-Powered-By (безопасность)
   poweredByHeader: false,
 };
 

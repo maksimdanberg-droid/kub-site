@@ -27,7 +27,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // ✅ Модал
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -52,24 +52,21 @@ export function Header() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // ✅ Слушатель кастомного события для открытия модала из других компонентов
+  // ✅ Слушатель кастомного события для открытия модала
   useEffect(() => {
     let lastOpenTime = 0;
-    
     const handleOpenModal = () => {
       const now = Date.now();
-      // Открываем не чаще чем раз в 400ms
       if (now - lastOpenTime > 400) {
         lastOpenTime = now;
         setIsModalOpen(true);
       }
     };
-    
     window.addEventListener("openConsultationModal", handleOpenModal as EventListener);
     return () => window.removeEventListener("openConsultationModal", handleOpenModal as EventListener);
   }, []);
 
-  // ✅ Hover логика для десктопа (ВОССТАНОВЛЕНО)
+  // ✅ Hover логика для десктопа
   const handleServicesMouseEnter = () => {
     if (isMobile) return;
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
@@ -112,6 +109,32 @@ export function Header() {
 
   return (
     <>
+      {/* ✅ Глобальные стили для анимации золотого текста (чтобы не ломалось в motion) */}
+      <style>{`
+        .gold-shimmer-text {
+          background: linear-gradient(90deg, #B8962E 0%, #F4D87A 45%, #B8962E 55%, #F4D87A 100%);
+          background-size: 200% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          -webkit-text-fill-color: transparent;
+          animation: shimmer 10s linear infinite;
+        }
+        .gold-shimmer-text.dimmed {
+          background: linear-gradient(90deg, rgba(184,150,46,0.5) 0%, rgba(244,216,122,0.8) 45%, rgba(184,150,46,0.5) 55%, rgba(244,216,122,0.8) 100%);
+          background-size: 200% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          -webkit-text-fill-color: transparent;
+          animation: shimmer 10s linear infinite;
+        }
+        @keyframes shimmer {
+          0% { background-position: 200% 50%; }
+          100% { background-position: -200% 50%; }
+        }
+      `}</style>
+
       <motion.header
         className="fixed top-0 left-0 right-0 z-50 will-change-[background-color,backdrop-filter,border-color,box-shadow]"
         style={{
@@ -126,40 +149,39 @@ export function Header() {
         <Container>
           <div className="flex items-center justify-between h-16 md:h-20">
             
-            {/* Логотип с анимированной золотой точкой */}
+            {/* Логотип */}
             <Link 
               href="/" 
-              className={`relative z-50 text-xl md:text-2xl font-bold tracking-tight font-heading transition-colors duration-500 ${
-                isScrolled ? "text-kub-navy" : "text-white"
-              }`}
+              className="relative z-50 group"
               aria-label="На главную"
             >
-              <span className="inline-block transition-opacity duration-500 hover:opacity-60">
-                КУБ
+              {/* Верхняя строка: КУБ + точка */}
+              <div className="flex items-baseline gap-0.5">
+                <span className={`text-xl md:text-2xl font-bold tracking-tight font-heading transition-colors duration-500 group-hover:opacity-60 ${
+                  isScrolled ? "text-kub-navy" : "text-white"
+                }`}>
+                  КУБ
+                </span>
+                {/* ✨ Анимация точки (shimmer) */}
+                <motion.span 
+                  className="inline-block text-xl md:text-2xl font-bold gold-shimmer-text"
+                  animate={{ 
+                    rotate: [0, 0.5, -0.5, 0]
+                  }}
+                  transition={{ 
+                    rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                >
+                  .
+                </motion.span>
+              </div>
+              
+              {/* ✅ Подпись под логотипом — Золотой текст с волной (CSS) */}
+              <span className={`block text-[10px] md:text-[11px] font-medium tracking-wide leading-tight mt-0.5 transition-opacity duration-500 ${
+                isScrolled ? "gold-shimmer-text" : "gold-shimmer-text dimmed"
+              }`}>
+                Консалтинговые услуги для бизнеса
               </span>
-              {/* ✨ Анимация точки: перелив золота (shimmer) + микро-вращение */}
-              <motion.span 
-                className="inline-block"
-                style={{
-                  background: 'linear-gradient(90deg, #B8962E 0%, #F4D87A 45%, #B8962E 55%, #F4D87A 100%)',
-                  backgroundSize: '200% 100%',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  WebkitTextFillColor: 'transparent',
-                  display: 'inline-block',
-                }}
-                animate={{ 
-                  backgroundPosition: ['200% 50%', '-200% 50%'],
-                  rotate: [0, 0.5, -0.5, 0]
-                }}
-                transition={{ 
-                  backgroundPosition: { duration: 2.5, repeat: Infinity, ease: "linear" },
-                  rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                }}
-              >
-                .
-              </motion.span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -220,7 +242,6 @@ export function Header() {
 
             {/* CTA & Mobile Toggle */}
             <div className="flex items-center gap-4">
-              {/* ✅ Кнопка открывает модал */}
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="hidden md:inline-flex items-center justify-center px-5 py-2.5 bg-kub-gold text-kub-navy font-semibold rounded-xl hover:bg-[#D4AF37]/90 transition-all shadow-lg shadow-kub-gold/20 cursor-pointer"
@@ -285,7 +306,6 @@ export function Header() {
                   </Link>
                 ))}
                 <div className="mt-4 pt-4 border-t border-gray-100">
-                  {/* ✅ Мобильная кнопка тоже открывает модал */}
                   <button
                     onClick={() => { setIsModalOpen(true); setIsMobileMenuOpen(false); }}
                     className="w-full py-3 bg-kub-gold text-kub-navy font-semibold rounded-xl hover:bg-[#D4AF37]/90 transition-all"
@@ -299,7 +319,6 @@ export function Header() {
         </AnimatePresence>
       </motion.header>
 
-      {/* ✅ Модал консультации */}
       <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );

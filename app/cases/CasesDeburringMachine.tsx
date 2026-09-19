@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
-import { Stethoscope, CheckCircle2 } from "lucide-react";
+import { Cog, CheckCircle2 } from "lucide-react";
 
 const staggerContainer = {
   hidden: {},
@@ -14,7 +14,7 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 };
 
-export default function CasesMedTech() {
+export default function CasesDeburringMachine() {
   return (
     <section className="bg-white py-16 md:py-24">
       <Container>
@@ -37,8 +37,8 @@ export default function CasesMedTech() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Stethoscope className="w-7 h-7 text-kub-gold" />
-              MedTech → Резидентство + грант ФСИ Развитие
+              <Cog className="w-7 h-7 text-kub-gold" />
+              Металлообработка → Станок для снятия заусенцев, грата и окалины
             </motion.h2>
 
             {/* Блок "Задача" */}
@@ -50,7 +50,7 @@ export default function CasesMedTech() {
               viewport={{ once: true }}
             >
               <p className="text-gray-700 leading-relaxed">
-                <span className="font-semibold text-kub-navy">Задача:</span> Получить статус резидента для снижения налоговой нагрузки и привлечь 30 млн ₽ на клинические испытания прототипа.
+                <span className="font-semibold text-kub-navy">Задача:</span> Получить грант на разработку отечественного станка для зачистки кромок металлических деталей после лазерной и плазменной резки.
               </p>
             </motion.div>
 
@@ -68,10 +68,10 @@ export default function CasesMedTech() {
               </h3>
               <ul className="list-none space-y-3">
                 {[
-                  "Пресобрали проект под требования УГТ-3 для участия в конкурсе ФСИ Развитие",
-                  "Упаковали описание инновационности для КС",
-                  "Подготовили ко-финансирование от партнёрской клиники",
-                  "Прошли защиту без доработок"
+                  "Провели аудит проекта и подобрали конкурс под стадию готовности разработки",
+                  "Выполнили патентный поиск и обосновали новизну конструкторских решений",
+                  "Подготовили техническую документацию: ТЗ, календарный план, смету и состав работ",
+                  "Разработали экономический блок с анализом рынка и сравнением с зарубежными аналогами"
                 ].map((item, i) => (
                   <motion.li key={i} variants={fadeInUp} className="flex items-start gap-3">
                     <span className="w-2 h-2 rounded-full bg-kub-gold mt-2 shrink-0" />
@@ -90,9 +90,9 @@ export default function CasesMedTech() {
               viewport={{ once: true }}
             >
               {[
-                { value: "28.5 млн ₽", label: "Получено (транш)" },
-                { value: "14.2 млн ₽/год", label: "Экономия на налогах" },
-                { value: "3–5 мес", label: "Сроки до результата" }
+                { value: "[30 млн ₽]", label: "Грант ФСИ «Старт-1»" },
+                { value: "Патент", label: "На полезную модель" },
+                { value: "[12 мес]", label: "Срок реализации" }
               ].map((item, i) => (
                 <motion.div 
                   key={i} 
@@ -123,19 +123,19 @@ export default function CasesMedTech() {
                 </thead>
                 <tbody className="text-gray-700">
                   <tr className="border-b border-gray-100">
-                    <td className="py-3 px-4">Налог на прибыль</td>
-                    <td className="py-3 px-4">20%</td>
-                    <td className="py-3 px-4 font-bold text-kub-gold">0%</td>
+                    <td className="py-3 px-4">Источник оборудования</td>
+                    <td className="py-3 px-4">Импорт (ЕС/Китай)</td>
+                    <td className="py-3 px-4 font-bold text-kub-gold">Отечественное производство</td>
                   </tr>
                   <tr className="border-b border-gray-100">
-                    <td className="py-3 px-4">Страховые взносы</td>
-                    <td className="py-3 px-4">30%</td>
-                    <td className="py-3 px-4 font-bold text-kub-gold">15%</td>
+                    <td className="py-3 px-4">Защита интеллектуальной собственности</td>
+                    <td className="py-3 px-4">Отсутствует</td>
+                    <td className="py-3 px-4 font-bold text-kub-gold">Патент на полезную модель</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">НДС</td>
-                    <td className="py-3 px-4">20%</td>
-                    <td className="py-3 px-4 font-bold text-kub-gold">0%</td>
+                    <td className="py-3 px-4">Зависимость от зарубежных поставщиков</td>
+                    <td className="py-3 px-4">Высокая</td>
+                    <td className="py-3 px-4 font-bold text-kub-gold">Минимизирована</td>
                   </tr>
                 </tbody>
               </table>
@@ -149,9 +149,9 @@ export default function CasesMedTech() {
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
             >
-              «Сэкономил 14 млн в первый год, которые реинвестировали в сертификацию. Сопровождение было точечным, без лишней бюрократии».
+              «Благодаря «КУБ» мы получили грант без доработок и уже запустили опытный образец станка. Документация была подготовлена точно под требования фонда».
               <footer className="text-sm text-gray-400 mt-3 not-italic">
-                — Основатель, MedTech-стартап
+                — Главный инженер, Предприятие металлообработки
               </footer>
             </motion.blockquote>
 
@@ -163,7 +163,7 @@ export default function CasesMedTech() {
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
             >
-              Ниша: диагностика, ОКВЭД 21.xx / 62.xx
+              С-З ФО / Металлообработка / ФСИ «Старт-1»
             </motion.p>
 
           </motion.div>

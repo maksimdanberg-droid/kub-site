@@ -1,339 +1,168 @@
-"use client";
+'use client'; // ✅ Необходим для AnimatePresence, состояния открытия и обработки кликов
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  X, Check, Download, Calendar, Lock, Clock, FileText,
-  Phone, Mail, ChevronDown, Send
-} from "lucide-react";
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  X, Phone, Mail, ShieldCheck, Clock, FileText, Lock, CheckCircle2, ChevronRight 
+} from 'lucide-react';
+import Link from 'next/link';
 
 type ConsultationModalProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-type ContactType = "phone" | "email";
+// ✅ Константы вынесены: защита от пересоздания при ререндерах, удобство редактирования
+const CONTACTS = {
+  phone: {
+    label: 'Телефон',
+    display: '+7 927 064 21 71',
+    href: 'tel:+79270642171', // ✅ Формат без пробелов для 100% совместимости с iOS/Android
+  },
+  email: {
+    label: 'Электронная почта',
+    display: 'info@kub-consult.ru',
+    href: 'mailto:info@kub-consult.ru',
+  },
+} as const;
 
-type FormData = {
-  name: string;
-  contact: string;
-  contactType: ContactType;
-  direction: string;
-  comment: string;
-  consent: boolean;
-};
+const TRUST_ITEMS = [
+  { icon: Lock, text: 'NDA по запросу' },
+  { icon: Clock, text: 'Ответ в течение 2 часов' },
+  { icon: FileText, text: 'Работаем по договору' },
+  { icon: ShieldCheck, text: 'Данные не сохраняются' },
+] as const;
 
-type FormErrors = Partial<Record<keyof FormData, string>>;
-
-const DIRECTIONS = [
-  { value: "", label: "Выберите направление" },
-  { value: "skolkovo", label: "Резидентство Сколково" },
-  { value: "grants", label: "Гранты и субсидии" },
-  { value: "tax", label: "Налоговые льготы" },
-  { value: "patents", label: "Патентование и защита ИП" },
-  { value: "unsure", label: "Не определился" },
-];
-
-// Валидация email
-const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-// Валидация телефона: ровно 11 цифр, начинается с 7
-const isValidPhone = (value: string) => {
-  const digits = value.replace(/\D/g, "");
-  return digits.length === 11 && digits.startsWith("7");
-};
-
-// Строгая маска: +7 (XXX) XXX-XX-XX
-const formatPhone = (value: string) => {
-  let digits = value.replace(/\D/g, "");
-  if (digits.length > 0 && digits[0] === "8") digits = "7" + digits.slice(1);
-  if (digits.length > 0 && digits[0] !== "7") digits = "7" + digits;
-  digits = digits.slice(0, 11);
-
-  let formatted = "+7";
-  if (digits.length > 1) formatted += ` (${digits.slice(1, 4)}`;
-  if (digits.length >= 5) formatted += `) ${digits.slice(4, 7)}`;
-  if (digits.length >= 8) formatted += `-${digits.slice(7, 9)}`;
-  if (digits.length >= 10) formatted += `-${digits.slice(9, 11)}`;
-  return formatted;
-};
-
+/**
+ * ConsultationModal — модальное окно с безопасным контактным блоком.
+ * Не собирает ПДн (нет форм), снижает риски по 152-ФЗ.
+ */
 export default function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    contact: "",
-    contactType: "phone",
-    direction: "",
-    comment: "",
-    consent: true,
-  });
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const modalRef = useRef<HTMLDivElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const contactRef = useRef<HTMLInputElement>(null);
-
-  // Блокировка скролла и фокус
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-      setTimeout(() => nameRef.current?.focus(), 100);
-    }
-    return () => { document.body.style.overflow = "unset"; };
-  }, [isOpen]);
-
-  // Закрытие по Esc
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) onClose();
-    };
-    document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
-  }, [isOpen, onClose]);
-
-  // Клик вне модала
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(e.target as Node)) onClose();
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    
-    if (name === "contact" && formData.contactType === "phone") {
-      const formatted = formatPhone(value);
-      setFormData((prev) => ({ ...prev, contact: formatted }));
-      requestAnimationFrame(() => {
-        if (contactRef.current) {
-          const len = contactRef.current.value.length;
-          contactRef.current.setSelectionRange(len, len);
-        }
-      });
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
-    
-    if (errors[name as keyof FormData]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
-    }
-  };
-
-  const handleContactTypeToggle = (type: ContactType) => {
-    setFormData((prev) => ({ ...prev, contactType: type, contact: "" }));
-    if (errors.contact) setErrors((prev) => ({ ...prev, contact: undefined }));
-  };
-
-  const isContactValid = formData.contactType === "phone"
-    ? isValidPhone(formData.contact)
-    : isValidEmail(formData.contact);
-
-  const validate = (): boolean => {
-    const newErrors: FormErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Введите имя";
-    
-    if (formData.contactType === "phone") {
-      if (!isValidPhone(formData.contact)) {
-        newErrors.contact = "Введите полный номер: +7 (XXX) XXX-XX-XX";
-      }
-    } else {
-      if (!isValidEmail(formData.contact)) {
-        newErrors.contact = "Введите корректный email";
-      }
-    }
-    
-    if (!formData.direction) newErrors.direction = "Выберите направление";
-    if (!formData.consent) newErrors.consent = "Необходимо согласие";
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-    
-    setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-  };
-
-  const handleDownloadTemplate = () => {
-    alert("📥 Шаблон финансовой модели будет отправлен на ваш контакт в течение 2 минут.");
-  };
-
-  const renderForm = () => (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      {/* Имя */}
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Ваше имя *</label>
-        <input
-          ref={nameRef}
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Иван Иванов"
-          className={`w-full px-4 py-3 border rounded-lg text-base text-gray-900 bg-white placeholder-gray-400 transition-all outline-none ${
-            errors.name ? "border-red-500 ring-2 ring-red-100" : "border-gray-300 focus:ring-2 focus:ring-kub-gold/20 focus:border-kub-gold"
-          }`}
-          autoComplete="name"
-        />
-        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
-      </div>
-
-      {/* Телефон / Email */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Контакты для связи *</label>
-        <div className="flex gap-2 mb-2">
-          <button type="button" onClick={() => handleContactTypeToggle("phone")}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              formData.contactType === "phone" ? "bg-kub-navy text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}>
-            <Phone size={14} /> Телефон
-          </button>
-          <button type="button" onClick={() => handleContactTypeToggle("email")}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              formData.contactType === "email" ? "bg-kub-navy text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}>
-            <Mail size={14} /> Email
-          </button>
-        </div>
-        
-        <input
-          ref={contactRef}
-          type={formData.contactType === "phone" ? "tel" : "email"}
-          name="contact"
-          value={formData.contact}
-          onChange={handleChange}
-          placeholder={formData.contactType === "phone" ? "+7 (___) ___-__-__" : "example@company.ru"}
-          inputMode={formData.contactType === "phone" ? "numeric" : "email"}
-          maxLength={formData.contactType === "phone" ? 18 : undefined}
-          className={`w-full px-4 py-3 border rounded-lg text-base text-gray-900 bg-white placeholder-gray-400 transition-all outline-none ${
-            errors.contact ? "border-red-500 ring-2 ring-red-100" : "border-gray-300 focus:ring-2 focus:ring-kub-gold/20 focus:border-kub-gold"
-          }`}
-          autoComplete={formData.contactType === "phone" ? "tel" : "email"}
-        />
-        {errors.contact && <p className="text-red-500 text-xs mt-1">{errors.contact}</p>}
-      </div>
-
-      {/* Направление */}
-      <div>
-        <label htmlFor="direction" className="block text-sm font-medium text-gray-700 mb-1">Интересующее направление</label>
-        <div className="relative">
-          <select
-            id="direction"
-            name="direction"
-            value={formData.direction}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg text-base appearance-none bg-white text-gray-900 transition-all outline-none cursor-pointer ${
-              errors.direction ? "border-red-500 ring-2 ring-red-100" : "border-gray-300 focus:ring-2 focus:ring-kub-gold/20 focus:border-kub-gold"
-            }`}
-          >
-            {DIRECTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value} className="bg-white text-gray-900">{opt.label}</option>
-            ))}
-          </select>
-          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
-        </div>
-        {errors.direction && <p className="text-red-500 text-xs mt-1">{errors.direction}</p>}
-      </div>
-
-      {/* Комментарий */}
-      <div>
-        <label htmlFor="comment" className="block text-sm font-medium text-gray-700 mb-1">Комментарий (необязательно)</label>
-        <textarea
-          id="comment"
-          name="comment"
-          value={formData.comment}
-          onChange={handleChange}
-          placeholder="Стадия проекта, ОКВЭД, примерный бюджет..."
-          rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg text-base text-gray-900 bg-white placeholder-gray-400 focus:ring-2 focus:ring-kub-gold/20 focus:border-kub-gold transition-all outline-none resize-none"
-        />
-      </div>
-
-      {/* Согласие */}
-      <label className="flex items-start gap-3 cursor-pointer group">
-        <input type="checkbox" name="consent" checked={formData.consent}
-          onChange={(e) => setFormData((prev) => ({ ...prev, consent: e.target.checked }))}
-          className="mt-1 w-4 h-4 rounded border-gray-300 text-kub-gold focus:ring-kub-gold cursor-pointer" />
-        <span className="text-xs text-gray-500 leading-relaxed">
-          Согласен на обработку <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-kub-gold underline hover:text-[#D4AF37]">персональных данных</a> в соответствии с 152-ФЗ
-        </span>
-      </label>
-      {errors.consent && <p className="text-red-500 text-xs -mt-3">{errors.consent}</p>}
-
-      {/* Кнопка */}
-      <div className="pt-2">
-        <button
-          type="submit"
-          disabled={isSubmitting || !formData.name.trim() || !isContactValid || !formData.direction || !formData.consent}
-          className="w-full flex items-center justify-center gap-2 py-3.5 px-6 bg-kub-gold text-kub-navy rounded-xl font-semibold hover:bg-[#D4AF37]/90 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-kub-gold/20"
-        >
-          {isSubmitting ? (
-            <><span className="animate-spin h-5 w-5 border-2 border-kub-navy/30 border-t-kub-navy rounded-full" /><span>Отправка...</span></>
-          ) : (
-            <><Send size={18} /><span>Записаться на консультацию</span></>
-          )}
-        </button>
-      </div>
-
-      <div className="flex items-center justify-center gap-4 pt-2 text-xs text-gray-400">
-        <span className="flex items-center gap-1"><Lock size={12} /> NDA</span>
-        <span className="flex items-center gap-1"><Clock size={12} /> Ответ за 2 ч</span>
-        <span className="flex items-center gap-1"><FileText size={12} /> Договор</span>
-      </div>
-    </form>
-  );
-
-  const renderSuccess = () => (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="text-center py-4">
-      <div className="mb-6">
-        <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-          <span className="text-kub-gold font-medium">✓ Заявка получена</span><span>Выбор слота</span><span>Аудит</span>
-        </div>
-        <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-          <motion.div className="h-full bg-kub-gold rounded-full" initial={{ width: "33%" }} animate={{ width: "66%" }} transition={{ duration: 0.8, delay: 0.3 }} />
-        </div>
-      </div>
-      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-        <Check className="w-8 h-8 text-green-600" />
-      </div>
-      <h3 className="text-xl font-bold text-kub-navy mb-2">Заявка принята!</h3>
-      <p className="text-gray-600 mb-6">Менеджер свяжется с вами до 18:00 МСК.</p>
-      <div className="space-y-3">
-        <button onClick={() => alert("📅 Календарь будет доступен после подтверждения")} className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-kub-navy text-white rounded-xl font-semibold hover:bg-[#162A47] transition-all">
-          <Calendar size={18} /><span>Выбрать время в календаре</span>
-        </button>
-        <button onClick={handleDownloadTemplate} className="w-full flex items-center justify-center gap-2 py-3 px-6 border-2 border-kub-gold text-kub-gold rounded-xl font-semibold hover:bg-kub-gold hover:text-kub-navy transition-all">
-          <Download size={18} /><span>Скачать шаблон финансовой модели</span>
-        </button>
-      </div>
-      <p className="text-xs text-gray-400 mt-6">Файл будет отправлен на указанный вами контакт</p>
-    </motion.div>
-  );
-
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] md:block hidden" onClick={handleBackdropClick} aria-hidden="true" />
-          <div className="fixed inset-0 z-[101] flex items-center justify-center md:p-4 pointer-events-none">
-            <motion.div ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="modal-title"
-              initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} transition={{ duration: 0.3, ease: "easeOut" }}
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 md:mx-0 pointer-events-auto overflow-hidden">
-              <div className="flex items-center justify-between p-5 border-b border-gray-100">
-                <h2 id="modal-title" className="text-lg font-bold font-heading text-kub-navy">{isSubmitted ? "Заявка отправлена" : "Получить консультацию"}</h2>
-                <button onClick={onClose} className="p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Закрыть">
-                  <X size={20} className="text-gray-400 hover:text-gray-600" />
+          {/* ✅ Backdrop: fixed + inset-0 гарантируют перекрытие всего экрана, z-50 держит поверх хедера */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            onClick={onClose} // ✅ Закрытие по клику на затемнённый фон
+            aria-hidden="true"
+          />
+          
+          {/* ✅ Контейнер центрирования: flex + items-center + justify-center */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              // ✅ pointer-events-auto возвращает кликабельность самой модалке
+              className="w-full max-w-2xl rounded-[32px] bg-white p-6 shadow-2xl pointer-events-auto md:p-8"
+            >
+              {/* Шапка модалки */}
+              <div className="mb-6 flex items-start justify-between">
+                <div>
+                  <div className="mb-2 flex flex-wrap items-center gap-3">
+                    <h2 id="modal-title" className="text-2xl font-bold text-slate-900 md:text-3xl">
+                      Свяжитесь с нами
+                    </h2>
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-emerald-200">
+                      <ShieldCheck size={12} />
+                      Безопасно
+                    </span>
+                  </div>
+                  <p className="max-w-md text-sm leading-relaxed text-slate-600 md:text-base">
+                    До подписания договора мы{' '}
+                    <span className="font-semibold text-slate-900">
+                      не запрашиваем, не храним и не обрабатываем персональные данные.
+                    </span>{' '}
+                    Для консультации просто позвоните или напишите нам.
+                  </p>
+                </div>
+                
+                {/* ✅ Кнопка закрытия */}
+                <button
+                  onClick={onClose}
+                  className="shrink-0 rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
+                  aria-label="Закрыть окно"
+                >
+                  <X size={20} />
                 </button>
               </div>
-              <div className="p-5 md:p-6">
-                <AnimatePresence mode="wait">{isSubmitted ? renderSuccess() : renderForm()}</AnimatePresence>
+
+              {/* Карточки контактов */}
+              <div className="mb-6 grid gap-3 md:grid-cols-2">
+                {Object.entries(CONTACTS).map(([key, contact]) => {
+                  const Icon = key === 'phone' ? Phone : Mail;
+                  return (
+                    <a
+                      key={key}
+                      href={contact.href}
+                      onClick={onClose} // ✅ Закрываем модалку при переходе к звонку/письму
+                      className="group flex items-center gap-4 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-100 transition-all hover:bg-white hover:shadow-md hover:ring-slate-200"
+                    >
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white transition-colors group-hover:bg-slate-800">
+                        <Icon size={20} />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-medium text-slate-500">{contact.label}</p>
+                        <p className="truncate break-all text-base font-semibold text-slate-900">
+                          {contact.display}
+                        </p>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+
+              {/* CTA кнопки */}
+              <div className="mb-6 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={CONTACTS.phone.href}
+                  onClick={onClose}
+                  className="flex-1 rounded-xl bg-slate-900 px-6 py-3.5 text-center font-semibold text-white shadow-lg shadow-slate-900/20 transition-all hover:bg-slate-800"
+                >
+                  Позвонить сейчас
+                </a>
+                <a
+                  href={CONTACTS.email.href}
+                  onClick={onClose}
+                  className="flex-1 rounded-xl border-2 border-slate-900 px-6 py-3.5 text-center font-semibold text-slate-900 transition-all hover:bg-slate-900 hover:text-white"
+                >
+                  Написать письмо
+                </a>
+              </div>
+
+              {/* Блок доверия */}
+              <div className="mb-6 grid gap-3 rounded-2xl bg-sky-50 p-4 ring-1 ring-sky-100 sm:grid-cols-2 md:grid-cols-4">
+                {TRUST_ITEMS.map(({ icon: Icon, text }) => (
+                  <div key={text} className="flex items-center gap-2">
+                    <CheckCircle2 size={16} className="shrink-0 text-sky-700" />
+                    <span className="text-xs font-medium text-slate-700 md:text-sm">{text}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Юридический футер */}
+              <div className="flex flex-col gap-3 border-t border-slate-100 pt-4 text-xs md:flex-row md:items-center md:justify-between md:text-sm">
+                <p className="flex items-start gap-2 text-slate-500">
+                  <ShieldCheck size={14} className="mt-0.5 shrink-0 text-slate-400" />
+                  Персональные данные обрабатываются только после заключения договора (152-ФЗ).
+                </p>
+                <Link
+                  href="/privacy"
+                  onClick={onClose}
+                  className="inline-flex items-center gap-1 font-medium text-slate-900 underline-offset-4 hover:underline"
+                >
+                  Политика конфиденциальности
+                  <ChevronRight size={14} />
+                </Link>
               </div>
             </motion.div>
           </div>

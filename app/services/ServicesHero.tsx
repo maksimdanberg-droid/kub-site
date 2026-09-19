@@ -32,7 +32,7 @@ export function ServicesHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Легализация инноваций{" "}
+            Сопровождение инноваций{" "}
             <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-kub-gold via-[#E8C84A] to-[#F4D86F]">
               и снижение налоговой нагрузки

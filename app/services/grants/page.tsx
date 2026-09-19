@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import GrantsHero from "./GrantsHero";
 import GrantsMatrix from "./GrantsMatrix"; 
 import FSIProgramRoadmap from "@/components/ui/FSIProgramRoadmap"; 
@@ -8,14 +7,20 @@ import FSIExpertiseBanner from "@/components/ui/FSIExpertiseBanner";
 import GrantsRequirements from "./GrantsRequirements";
 import GrantsFinalCTA from "./GrantsFinalCTA"; 
 
-// ✅ SEO Мета-теги (работает ТОЛЬКО в Server Component)
+// ✅ SEO Мета-теги с исправлениями
 export const metadata: Metadata = {
-  title: "Гранты и субсидии — ООО «КУБ» | ФСИ, Минпромторг, АТР",
+  title: "Гранты и субсидии — ООО «НТЦ «КУБ» | ФСИ, Минпромторг, АТР",
   description: "Помогаем получить гранты на НИОКР и коммерциализацию: ФСИ до 50 млн ₽, Минпромторг до 250 млн ₽. Сопровождение заявок, 85% одобрений.",
+  metadataBase: new URL('https://kub-consult.ru'),
+  alternates: {
+    canonical: '/services/grants/', 
+  },
+  
   openGraph: {
-    title: "Гранты и субсидии — ООО «КУБ» | ФСИ, Минпромторг, АТР",
+    title: "Гранты и субсидии — ООО «НТЦ «КУБ» | ФСИ, Минпромторг, АТР",
     description: "Помогаем получить гранты на НИОКР и коммерциализацию: ФСИ до 50 млн ₽, Минпромторг до 250 млн ₽. Сопровождение заявок, 85% одобрений.",
     type: "website",
+    url: 'https://kub-consult.ru/services/grants/', 
   },
 };
 
@@ -30,7 +35,7 @@ export default function GrantsPage() {
         <FSIExpertiseBanner />
         <GrantsRequirements />
         <GrantsFinalCTA /> 
-        </main>
-       </>
+      </main>
+    </>
   );
 }

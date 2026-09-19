@@ -7,22 +7,15 @@ import { Phone, Mail, MessageCircle, MapPin } from "lucide-react";
 const CONTACTS = [
   {
     icon: Phone,
-    label: "+7 (XXX) XXX-XX-XX",
+    label: "+7 (927) 064-21-71",
     sublabel: "Пн–Пт, 9:00–18:00 МСК",
-    href: "tel:+7XXXXXXXXXX",
+    href: "tel:+79210642171",
   },
   {
     icon: Mail,
-    label: "info@kub.ru",
+    label: "info@kub-consult.ru",
     sublabel: "Отвечаем в течение 2 часов",
-    href: "mailto:info@kub.ru",
-  },
-  {
-    icon: MessageCircle,
-    label: "Telegram / WhatsApp",
-    sublabel: "Быстрые ответы, документы",
-    href: "https://t.me/kub_consulting",
-    external: true,
+    href: "mailto:info@kub-consult.ru",
   },
   {
     icon: MapPin,
@@ -40,7 +33,11 @@ const staggerContainer = {
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.4, ease: "easeOut" as const } 
+  },
 };
 
 export default function ContactsInfo() {
@@ -107,7 +104,7 @@ export default function ContactsInfo() {
             </motion.p>
           </div>
 
-          {/* Правая колонка: Карта (заглушка с ссылкой) */}
+          {/* Правая колонка: Карта */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}

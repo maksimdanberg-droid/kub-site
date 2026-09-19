@@ -92,7 +92,8 @@ export default function FSIExpertiseBanner() {
                 <th className="text-center font-bold text-kub-navy py-3 px-4 border-b border-gray-200">МТК (приоритет)</th>
               </tr>
             </thead>
-            <tbody variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            {/* ✅ ИСПРАВЛЕНО: <tbody> → <motion.tbody> */}
+            <motion.tbody variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               {ELIGIBILITY_TABLE.map((row, i) => (
                 <motion.tr key={row.program} variants={rowVariants} className="hover:bg-gray-50/50 transition-colors">
                   <td className="font-medium text-kub-navy py-3 px-4 border-b border-gray-100">{row.program}</td>
@@ -112,7 +113,7 @@ export default function FSIExpertiseBanner() {
                   </td>
                 </motion.tr>
               ))}
-            </tbody>
+            </motion.tbody>
           </table>
         </motion.div>
 

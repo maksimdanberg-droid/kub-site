@@ -1,19 +1,33 @@
 import { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import CasesHero from "./CasesHero";
 import CasesMedTech from "./CasesMedTech";
 import CasesIndustrial from "./CasesIndustrial";
 import CasesEdtech from "./CasesEdtech";
+import CasesLaserPAC from "./CasesLaserPAC";
+import CasesDeburringMachine from "./CasesDeburringMachine";
+import CasesComputingModule from "./CasesComputingModule";
+import CasesAIDesignSystem from "./CasesAIDesignSystem"; 
+import CasesFeedComplex from "./CasesFeedComplex";
+import CasesCosmeceutical from "./CasesCosmeceutical";
+import CasesMedicalContainers from "./CasesMedicalContainers";
+import CasesBridgeDampers from "./CasesBridgeDampers";
+import CasesMTKRegistry from "./CasesMTKRegistry";
 
-// ✅ ИСПРАВЛЕНО: "metadata" (полное слово) + ":" перед типом
 export const metadata: Metadata = {
-  title: "Кейсы — ООО «КУБ» | Реальные результаты в цифрах",
-  description: "Реальные кейсы ООО «КУБ»: резидентство Сколково, гранты ФСИ, налоговые льготы. Измеримая выгода для технологических компаний.",
+  title: "Кейсы команды КУБ | Реальные результаты в цифрах",
+  description: "Реальные кейсы ООО «НТЦ «КУБ»: резидентство Сколково, гранты ФСИ, налоговые льготы. Измеримая выгода для технологических компаний.",
+  
+  metadataBase: new URL('https://kub-consult.ru'),
+  alternates: {
+    canonical: '/cases/', 
+  },
+  
   openGraph: {
-    title: "Кейсы — ООО «КУБ» | Реальные результаты в цифрах",
-    description: "Реальные кейсы ООО «КУБ»: резидентство Сколково, гранты ФСИ, налоговые льготы. Измеримая выгода для технологических компаний.",
+    title: "Кейсы команды КУБ | Реальные результаты в цифрах",
+    description: "Реальные кейсы ООО «НТЦ «КУБ»: резидентство Сколково, гранты ФСИ, налоговые льготы. Измеримая выгода для технологических компаний.",
     type: "website",
+    url: 'https://kub-consult.ru/cases/',
   },
 };
 
@@ -24,9 +38,17 @@ export default function CasesPage() {
       <main className="min-h-screen">
         <CasesHero />
         <CasesMedTech />
+        <CasesLaserPAC />
+        <CasesDeburringMachine /> 
+        <CasesComputingModule /> 
+        <CasesAIDesignSystem /> 
+        <CasesFeedComplex />
+        <CasesCosmeceutical />
+        <CasesMedicalContainers />
+        <CasesBridgeDampers />
         <CasesIndustrial />
         <CasesEdtech /> 
-        {/* Сюда потом добавим Кейс 2: Промышленная автоматизация */}
+        <CasesMTKRegistry /> 
       </main>
     </>
   );
